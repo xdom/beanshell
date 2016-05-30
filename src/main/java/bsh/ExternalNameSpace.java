@@ -199,7 +199,9 @@ public class ExternalNameSpace extends NameSpace
 	public void clear() 
 	{
 		super.clear();
-		externalMap.clear();
+		if (externalMap != null) {
+			externalMap.clear();
+		}
 	}
 
 }
