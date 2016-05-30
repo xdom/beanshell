@@ -44,11 +44,13 @@ public class EvalError extends Exception
 
 	// Note: no way to mutate the Throwable message, must maintain our own
 	String message;
+	String originalMessage;
 
 	CallStack callstack;
 
 	public EvalError( String s, SimpleNode node, CallStack callstack ) {
 		setMessage(s);
+		setOriginalMessage(s);
 		this.node = node;
 		// freeze the callstack for the stack trace.
 		if ( callstack != null )
@@ -148,6 +150,14 @@ public class EvalError extends Exception
 	public String getMessage() { return message; }
 
 	public void setMessage( String s ) { message = s; }
+
+	public String getOriginalMessage() {
+		return originalMessage;
+	}
+
+	public void setOriginalMessage(String originalMessage) {
+		this.originalMessage = originalMessage;
+	}
 
 	/**
 		Prepend the message if it is non-null.
