@@ -83,9 +83,13 @@ class BSHPrimaryExpression extends SimpleNode
 				if ( toLHS )
 					obj = ((BSHAmbiguousName)obj).toLHS(
 						callstack, interpreter);
-				else
-					obj = ((BSHAmbiguousName)obj).toObject(
-						callstack, interpreter);
+				else {
+					String name = ((BSHAmbiguousName) obj).getText();
+					obj = ((BSHAmbiguousName) obj).toObject(
+							callstack, interpreter);
+					if (obj == Primitive.VOID && numChildren == 1)
+						throw new EvalError("Variable not found: " + name, this, callstack);
+				}
 			else 
 				// Some arbitrary kind of node
 				if ( toLHS )
